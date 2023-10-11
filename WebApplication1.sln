@@ -5,9 +5,9 @@ VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{266EDA27-BD03-4978-A140-38BC4477EEB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{B2A14015-9D5A-44AD-A0B6-7A221070896B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{B2A14015-9D5A-44AD-A0B6-7A221070896B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyDataBase", "MyDataBase\MyDataBase.csproj", "{01F3740C-70A2-430C-8F76-BE3803BAF0C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyDataBase", "MyDataBase\MyDataBase.csproj", "{01F3740C-70A2-430C-8F76-BE3803BAF0C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

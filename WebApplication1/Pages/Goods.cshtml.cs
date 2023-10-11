@@ -10,8 +10,7 @@ namespace WebApplication1.Pages
 {
     public class GoodsModel : PageModel
     {
-
-        public IEnumerable<Car> Cars { get; set; }
+               
         public IEnumerable<UserModel> Users { get; set; }
         public class Car
         {
@@ -50,19 +49,7 @@ namespace WebApplication1.Pages
             Success,
             Error
         }
-        //public class InputDate
-        //{
-        //    [Required]
-        //    [StringLength(10)]
-        //    [MinLength(5)]
-        //    public string? Name { get; set; }
-        //    public string? Email { get; set; }
-        //    public string? Password { get; set; }
-        //    public int? Age { get; set; }
-
-
-        //}
-
+        
 
         public class UserModel
         {
@@ -115,7 +102,12 @@ namespace WebApplication1.Pages
 
         public void OnPost()
         {
+
             ModelState.Remove("Input.Id");
+            if (!string.IsNullOrEmpty(Input?.Email) && _userService.IsUsedEmail(Input?.Email))
+            {
+                ModelState.AddModelError("Input.Email", "This email can`t be used");
+            }
             if (!ModelState.IsValid)
             {
                 return;

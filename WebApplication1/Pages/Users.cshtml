@@ -1,0 +1,31 @@
+﻿@page
+@model WebApplication1.Pages.UsersModel
+@{
+}
+<link rel="stylesheet" href="~/css/carTable.css" asp-append-version="true" />
+
+<table class="table-car">
+    <thead style="background-color:pink;">
+        <tr class="text-center">
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Age</th>
+            <th>CreateData</th>
+            <th>Password</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.Users)
+        {
+            <tr>
+                <th>@user.Id</th>
+                <th>@user.Name</th>
+                <th>@user.Email</th>
+                <th>@user.Age</th>
+                <th>@user.CreateData</th>
+                <th>@user.Password</th>
+            </tr>
+        }
+    </tbody>
+</table>

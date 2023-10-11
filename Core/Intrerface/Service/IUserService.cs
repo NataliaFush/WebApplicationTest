@@ -10,5 +10,7 @@ namespace Core.Intrerface.Service
     {
         IUser GetUserById(Guid id);
         bool CreateUser(IUser user);
+        bool IsUsedEmail(string? Email);
+        public IEnumerable<IUser> GetAllUser();
     }
 }

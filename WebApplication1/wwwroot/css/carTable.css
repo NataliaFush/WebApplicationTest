@@ -1,11 +1,12 @@
 ﻿.table-car {
-    background-color:burlywood;
+    background-color: cornsilk  ;
+    width: 100%;
 }
 td, th {
     border: 1px dotted black; 
 }
 table tr:nth-child(2n) {
-    background-color:bisque; 
+    background-color: bisque; 
 }
 .validation-summary-errors{
     color : red;

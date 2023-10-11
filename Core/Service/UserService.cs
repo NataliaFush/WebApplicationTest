@@ -20,31 +20,26 @@ namespace Core.Service
         public IUser GetUserById(Guid id)
         {
             return _userRepositorii.GetUserById(id);
-            //var user = _userRepositorii.GetUserById(id);
-            //if (user is User)
-            //{
-            //    return user as User;
-            //}
-            //else
-            //{
-            //    return new User()
-            //    {
-            //        Id = user.Id,
-            //        Name = user.Name,
-            //        Age = user.Age,
-            //        CreateData = user.CreateData,
-            //        Email = user.Email,
-            //        Password = user.Password,
-            //    };
-            //}
-            //return null;
         }
+
+        public bool IsUsedEmail(string? Email)
+        {
+            if (_userRepositorii.GetUserByEmail(Email) != null)
+                return true;
+            return false;
+        }
+
 
         public bool CreateUser(IUser user)
         {
             user.Id = Guid.NewGuid();
             user.CreateData = DateTime.Now;
             return _userRepositorii.CreateUser(user);
+        }
+
+        public IEnumerable<IUser> GetAllUser()
+        {
+           return  _userRepositorii.GetAllUser();
         }
     }
 }

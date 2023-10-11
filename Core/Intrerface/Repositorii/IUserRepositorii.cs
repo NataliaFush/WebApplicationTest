@@ -12,5 +12,7 @@ namespace MyDataBase
     {
         public IUser GetUserById(Guid id);
         public bool CreateUser(IUser user);
+        public IUser GetUserByEmail(string email);
+        public IEnumerable<IUser> GetAllUser();
     }
 }
