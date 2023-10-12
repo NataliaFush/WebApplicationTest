@@ -49,7 +49,7 @@ namespace WebApplication1.Pages
             Success,
             Error
         }
-        
+
 
         public class UserModel
         {
@@ -66,6 +66,9 @@ namespace WebApplication1.Pages
             [DataType(DataType.EmailAddress)]
             [Display(Name = "Email", Prompt = "Enter your Email")]
             public string? Email { get; set; }
+
+            public string? Address {get; set;}
+            public int? AddressId { get; set; }
 
             [Required]
             [Range(18, 99)]
@@ -138,6 +141,12 @@ namespace WebApplication1.Pages
 
 
         }
+
+        public IActionResult OnPostCheckEmail(string email)
+        {
+            return new JsonResult(_userService.IsUsedEmail(email));
+        }
     }
+
 }
 

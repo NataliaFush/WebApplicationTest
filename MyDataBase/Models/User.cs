@@ -24,6 +24,8 @@ namespace MyDataBase.Models
         [MinLength(5)]
         [StringLength(50)]
         public string? Password { get; set; }
- 
+        public Address? Address { get; set; }
+        public int? AddressId { get; set; }
+
     }
 }
