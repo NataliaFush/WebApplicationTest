@@ -15,5 +15,6 @@ namespace Core.Entities
         public int? Age { get; set; }
         public DateTime? CreateData { get; set; }
         public string? Password { get; set; }
+        public IAddress? Address { get; set; }
     }
 }

@@ -9,12 +9,12 @@ namespace Core.Intrerface
 {
     public interface IUser
     {
-
-        public Guid Id { get; set; }
-        public string? Name { get; set; }
-        public string? Email { get; set; }
-        public int? Age { get; set; }
-        public DateTime? CreateData { get; set; }
-        public string? Password { get; set; }
+        Guid Id { get; set; }
+        string? Name { get; set; }
+        string? Email { get; set; }
+        int? Age { get; set; }
+        DateTime? CreateData { get; set; }
+        string? Password { get; set; }
+        IAddress? Address { get; set; }
     }
 }

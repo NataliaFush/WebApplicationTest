@@ -13,6 +13,7 @@
             <th>Age</th>
             <th>CreateData</th>
             <th>Password</th>
+            <th>Index</th>
         </tr>
     </thead>
     <tbody>
@@ -25,6 +26,8 @@
                 <th>@user.Age</th>
                 <th>@user.CreateData</th>
                 <th>@user.Password</th>
+                <th>@user.Address?.PostalCode</th>
+
             </tr>
         }
     </tbody>

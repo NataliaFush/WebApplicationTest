@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace MyDataBase
 {
-    
+
     public class UserRepositorii : IUserRepositorii
     {
-        private IUser? CastToIUser(Models.User user)
+        private IUser? CastToIUser(Models.User? user)
         {
             if (user == null) return null;
 
@@ -21,7 +22,21 @@ namespace MyDataBase
                 Email = user.Email,
                 Age = user.Age,
                 CreateData = user.CreateData,
-                Password = user.Password
+                Password = user.Password,
+                Address = CastToIAddress(user.Address)
+            };
+
+        }
+        private IAddress? CastToIAddress(Models.Address? address)
+        {
+            if (address == null) return null;
+
+            return new Core.Entities.Address()
+            {
+                Id=address.Id,
+                City = address.City,    
+                PostalCode = address.PostalCode,
+                Street = address.Street
             };
 
         }
@@ -34,17 +49,16 @@ namespace MyDataBase
 
         public IEnumerable<IUser> GetAllUser()
         {
-            var users = _dbcontext.Users;
-            var result = new List<IUser>();
+            var users = _dbcontext.Users.Include(x => x.Address);
+            var result = new List<IUser?>();
             foreach (var user in users)
             {
-
                 result.Add(CastToIUser(user));
             }
             return result;
         }
 
-        public IUser GetUserById(Guid id)
+        public IUser? GetUserById(Guid id)
         {
             var users = _dbcontext.Users;
             foreach (var user in users)
@@ -58,7 +72,7 @@ namespace MyDataBase
             return null;
         }
 
-        public IUser GetUserByEmail(string email)
+        public IUser? GetUserByEmail(string email)
         {
             var users = _dbcontext.Users;
             foreach (var user in users)
@@ -66,7 +80,6 @@ namespace MyDataBase
                 if (!string.IsNullOrEmpty(user.Email) && (user.Email.ToLower().Equals(email.ToLower())))
                 {
                     return CastToIUser(user);
-
                 }
 
             }
