@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Intrerface.Repositorii
+namespace Core.Enums
 {
-    public interface IAddressRepositorii
+    public enum ResultType
     {
+        Success,
+        Error
     }
 }

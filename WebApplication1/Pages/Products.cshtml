@@ -1,0 +1,51 @@
+﻿@page
+@model WebApplication1.Pages.ProductsModel
+@{
+}
+<link rel="stylesheet" href="~/css/carTable.css" asp-append-version="true" />
+
+<table class="table-car">
+    <thead style="background-color:pink;">
+        <tr class="text-center">
+            <th>Id</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>DiscountPercentage</th>
+            <th>Rating</th>
+            <th>Stock</th>
+            <th>Description</th>
+            <th>Brand</th>
+            <th>Category</th>
+            <th>Thumbnail</th>
+            <th>Images</th>
+          
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.Products)
+        {
+            <tr>
+                <th>@product.Id</th>
+                <th>@product.Title</th>
+                <th>@product.Description</th>
+                <th>@product.Price</th>
+                <th>@product.DiscountPercentage</th>
+                <th>@product.Rating</th>
+                <th>@product.Stock</th>
+                <th>@product.Description</th>
+                <th>@product.Brand</th>
+                <th>@product.Category</th>
+                <th><img src="@product.Thumbnail" class="img-thumbnail" /></th>
+                <th>
+                    @foreach (var im in product.Images)
+                    {
+                        <img src="@im" class="resize"/>
+
+                    }
+                </th>
+            </tr>
+        }
+    </tbody>
+</table>

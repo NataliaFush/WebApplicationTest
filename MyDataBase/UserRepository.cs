@@ -1,5 +1,6 @@
 ﻿using System;
-using Core.Intrerface;
+using Core.Interface;
+using Core.Entities;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 namespace MyDataBase
 {
 
-    public class UserRepositorii : IUserRepositorii
+    public class UserRepository : IUserRepository
     {
         private IUser? CastToIUser(Models.User? user)
         {
@@ -42,7 +43,7 @@ namespace MyDataBase
         }
         protected readonly MyDbContext _dbcontext;
 
-        public UserRepositorii(MyDbContext myDb)
+        public UserRepository(MyDbContext myDb)
         {
             _dbcontext = myDb;
         }

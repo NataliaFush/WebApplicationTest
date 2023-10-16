@@ -37,12 +37,7 @@ table tr:nth-child(2n) {
     animation: rotation 0.5s linear infinite reverse;
 }
 
-@keyframes rotation {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
+img.resize {
+    width: 20px;
+    height: 20px;
 }

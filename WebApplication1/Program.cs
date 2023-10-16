@@ -1,8 +1,10 @@
-using Core.Intrerface.Service;
+using Core.Interface.Repository;
+using Core.Interface.Service;
 using Core.Service;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using MyDataBase;
+using MyDataBase.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,8 +13,10 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<MyDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("RazorPagesMovieContext") ?? throw new InvalidOperationException("Connection string 'RazorPagesMovieContext' not found.")));
 
-builder.Services.AddTransient<IUserRepositorii, UserRepositorii>();
+builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IProductService, ProductService>();
+builder.Services.AddTransient<IProductRepository, ProductRepository>();
 
 var app = builder.Build();
 

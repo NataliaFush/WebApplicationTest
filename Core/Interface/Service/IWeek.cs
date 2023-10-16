@@ -4,14 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Enum
+namespace Core.Interface
 {
-
-    public enum Language
+    public interface IWeek
     {
-        Ukrainian = 1,
-        English,
-        French
     }
-
 }

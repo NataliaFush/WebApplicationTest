@@ -1,6 +1,6 @@
 using Core.Entities;
-using Core.Intrerface;
-using Core.Intrerface.Service;
+using Core.Interface;
+using Core.Interface.Service;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;

@@ -1,4 +1,4 @@
-﻿using Core.Intrerface;
+﻿using Core.Interface;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MyDataBase
 {
-    public interface IUserRepositorii
+    public interface IUserRepository
     {
         public IUser GetUserById(Guid id);
         public bool CreateUser(IUser user);

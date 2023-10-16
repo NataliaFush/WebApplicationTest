@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Intrerface.Service
+namespace Core.Interface.Service
 {
     public interface IUserService
     {

@@ -1,6 +1,6 @@
 ﻿using Core.Entities;
-using Core.Intrerface;
-using Core.Intrerface.Service;
+using Core.Interface;
+using Core.Interface.Service;
 using MyDataBase;
 using System;
 using System.Collections.Generic;
@@ -12,8 +12,8 @@ namespace Core.Service
 {
     public class UserService : IUserService
     {
-        protected readonly IUserRepositorii _userRepositorii;
-        public UserService(IUserRepositorii userRepositorii)
+        protected readonly IUserRepository _userRepositorii;
+        public UserService(IUserRepository userRepositorii)
         {
             _userRepositorii = userRepositorii;
         }
