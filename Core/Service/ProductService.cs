@@ -22,5 +22,20 @@ namespace Core.Service
         {
             return await _productRepository.GetAllProductAsync();
         }
+
+        public async Task<IEnumerable<Product>> FindProductsAsync(string searchString)
+
+        {
+            return (await GetAllProductAsync())
+                .Where(x => x.Title.Contains(searchString, StringComparison.OrdinalIgnoreCase) || x.Description.Contains(searchString, StringComparison.OrdinalIgnoreCase));
+        }
+
+        public async Task<Product> GetProductById(int id)
+        {
+            var products = await GetAllProductAsync();
+            return products.FirstOrDefault(x => x.Id == id);
+        }
+
+
     }
 }

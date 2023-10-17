@@ -3,6 +3,14 @@
 @{
 }
 <link rel="stylesheet" href="~/css/carTable.css" asp-append-version="true" />
+<div class="d-flex justify-content-end">
+    <nav class="navbar navbar-light bg-light">
+        <form class="form-inline d-flex">
+            <input class="form-control mr-sm-2" name="searchString" type="search" placeholder="Search" aria-label="Search" minlength="3" required>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </nav>
+</div>
 
 <table class="table-car">
     <thead style="background-color:pink;">
@@ -14,7 +22,6 @@
             <th>DiscountPercentage</th>
             <th>Rating</th>
             <th>Stock</th>
-            <th>Description</th>
             <th>Brand</th>
             <th>Category</th>
             <th>Thumbnail</th>
@@ -28,13 +35,12 @@
         {
             <tr>
                 <th>@product.Id</th>
-                <th>@product.Title</th>
+                <th><a asp-page = "Product" asp-route-id="@product.Id">@product.Title</a></th>
                 <th>@product.Description</th>
                 <th>@product.Price</th>
                 <th>@product.DiscountPercentage</th>
                 <th>@product.Rating</th>
                 <th>@product.Stock</th>
-                <th>@product.Description</th>
                 <th>@product.Brand</th>
                 <th>@product.Category</th>
                 <th><img src="@product.Thumbnail" class="img-thumbnail" /></th>

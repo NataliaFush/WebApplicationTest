@@ -6,12 +6,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace MyDataBase
 {
 
     public class UserRepository : IUserRepository
     {
+        protected readonly MyDbContext _dbcontext;
+
+        public UserRepository(MyDbContext myDb, IMemoryCache memoryCache)
+        {
+            _dbcontext = myDb;
+           
+        }
         private IUser? CastToIUser(Models.User? user)
         {
             if (user == null) return null;
@@ -40,12 +48,6 @@ namespace MyDataBase
                 Street = address.Street
             };
 
-        }
-        protected readonly MyDbContext _dbcontext;
-
-        public UserRepository(MyDbContext myDb)
-        {
-            _dbcontext = myDb;
         }
 
         public IEnumerable<IUser> GetAllUser()
