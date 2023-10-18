@@ -17,10 +17,10 @@
 <h2 style="text-align:center">Product Card</h2>
 
 <div class="card">
-    <img src="@Model.Product.Thumbnail" style="width:100%">
-    <h1>@Model.Product.Title</h1>
-    <p class="price">@Model.Product.Price $</p>
-    <p>@Model.Product.Description</p>
+    <img src="/image/@Model.Product?.Id/@Model.Product?.Thumbnail?.Split('/').Last()" style="width:100%">
+    <h1>@Model.Product?.Title</h1>
+    <p class="price">@Model.Product?.Price $</p>
+    <p>@Model.Product?.Description</p>
     
 </div>
 

@@ -43,12 +43,11 @@
                 <th>@product.Stock</th>
                 <th>@product.Brand</th>
                 <th>@product.Category</th>
-                <th><img src="@product.Thumbnail" class="img-thumbnail" /></th>
+                <th><img src="/image/@product.Id/@product?.Thumbnail?.Split('/').Last()" class="img-thumbnail" /></th>
                 <th>
                     @foreach (var im in product.Images)
                     {
-                        <img src="@im" class="resize"/>
-
+                        <img src="/image/@product.Id/@im?.Split('/').Last()" class="resize" />
                     }
                 </th>
             </tr>
