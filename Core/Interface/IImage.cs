@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Core.Interface
 {
-    public interface IAddress
+    public interface IImage
     {
-        int Id { get; set; }
-        string? City { get; set; }
-        string? Street { get; set; }
-        string? PostalCode { get; set; }
+ 
+        string? Name { get; set; }
+        byte[]? Data { get; set; }
+        DateTime UpdateDate { get; set; }
     }
 }

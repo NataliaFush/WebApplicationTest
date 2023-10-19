@@ -18,6 +18,7 @@ builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IProductService, ProductService>();
 builder.Services.AddTransient<IProductRepository, ProductRepository>();
 builder.Services.AddTransient<IImageService, ImageService>();
+builder.Services.AddTransient<IImageRepository, ImageRepository>();
 
 var app = builder.Build();
 
@@ -39,3 +40,4 @@ app.UseAuthorization();
 app.MapRazorPages();
 
 app.Run();
+

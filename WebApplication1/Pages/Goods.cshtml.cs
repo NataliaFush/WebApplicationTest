@@ -1,4 +1,5 @@
 using Core.Entities;
+using Core.Healper;
 using Core.Interface;
 using Core.Interface.Service;
 using Microsoft.AspNetCore.Mvc;
@@ -92,15 +93,16 @@ namespace WebApplication1.Pages
         }
         //public void OnGet()
         //{
-        //    Cars = new List<Car>()
-        //    {
-        //        new Car(){Category = Category.Legkova, Name = "Audi", Price = 8000},
-        //        new Car(){Category = Category.Vantajna, Name = "Iveco", Price = 12000},
-        //        new Car(){Category = Category.Vantajna, Name = "Reno", Price = 5600},
-        //        new Car(){Category = Category.Vantajna, Name = "Volsvagen", Price = 152000},
-        //        new Car(){Category = Category.Legkova, Name = "Honda", Price = 5600},
-        //        new Car(){Category = Category.Bike, Name = "Aydi", Price = 80580}
-        //    };
+        //    //    Cars = new List<Car>()
+        //    //    {
+        //    //        new Car(){Category = Category.Legkova, Name = "Audi", Price = 8000},
+        //    //        new Car(){Category = Category.Vantajna, Name = "Iveco", Price = 12000},
+        //    //        new Car(){Category = Category.Vantajna, Name = "Reno", Price = 5600},
+        //    //        new Car(){Category = Category.Vantajna, Name = "Volsvagen", Price = 152000},
+        //    //        new Car(){Category = Category.Legkova, Name = "Honda", Price = 5600},
+        //    //        new Car(){Category = Category.Bike, Name = "Aydi", Price = 80580}
+        //    //    };
+            
         //}
 
         public void OnPost()
@@ -139,7 +141,7 @@ namespace WebApplication1.Pages
                 Response = new Result() { ResultType = ResultType.Error, Message = $"User {Input.Name} was not created" };
             }
 
-
+           
         }
 
         public IActionResult OnPostCheckEmail(string email)

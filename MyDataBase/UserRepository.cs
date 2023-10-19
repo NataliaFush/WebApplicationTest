@@ -15,10 +15,9 @@ namespace MyDataBase
     {
         protected readonly MyDbContext _dbcontext;
 
-        public UserRepository(MyDbContext myDb, IMemoryCache memoryCache)
+        public UserRepository(MyDbContext myDb)
         {
             _dbcontext = myDb;
-           
         }
         private IUser? CastToIUser(Models.User? user)
         {

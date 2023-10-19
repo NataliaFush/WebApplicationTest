@@ -7,6 +7,9 @@ using Core.Interface.Repository;
 using Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
+using Core.Healper;
+using System.Diagnostics;
+using Core.Enums;
 
 namespace WebApplication1.Pages
 {
@@ -34,9 +37,15 @@ namespace WebApplication1.Pages
             {
                 Products = await _productService.FindProductsAsync(searchString);
             }
+            //var st = new TestSpeed();
+            //Stopwatch watch = new Stopwatch();
+            
+            var a = "http://www.example.com".IsStringLink();
 
+            var en = DayType.Friday.GetDisplayName(); 
 
             return Page();
+
         }
 
     }

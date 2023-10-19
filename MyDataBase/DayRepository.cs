@@ -24,7 +24,7 @@ namespace DataBase
             {
                 if (day.Language == language)
                 {
-                    dictionary.Add(day.DayType ?? DayType.None, day.Value);
+                    dictionary.Add(day.DayOfWeek, day.Value);
                 }
             }
             return dictionary;
