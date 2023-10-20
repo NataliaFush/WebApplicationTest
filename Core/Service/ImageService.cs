@@ -2,15 +2,19 @@
 using Core.Interface;
 using Core.Interface.Repository;
 using Core.Interface.Service;
+using Microsoft.Extensions.Options;
+using static Azure.Core.HttpHeader;
 
 namespace Core.Service
 {
     public class ImageService : IImageService
     {
         protected readonly IImageRepository _imageRepository;
-        public ImageService(IImageRepository imageRepository)
+        protected readonly AppConf _config;
+        public ImageService(IImageRepository imageRepository, IOptions<AppConf> options)
         {
             _imageRepository = imageRepository;
+            _config = options.Value;
         }
 
 
@@ -18,54 +22,28 @@ namespace Core.Service
         {
             if (!string.IsNullOrEmpty(name) && id.HasValue && id.Value != 0)
             {
-                var imageName = id + "_image_" + name;
-                if (ImageCache.IsImageDownload(imageName))
+                var imageName = GetImageName(id.Value, name);
+                if (ImageCache.IsImageDownload(imageName, out byte[]? image))
                 {
-                    return ImageCache.GetImages(imageName);
+                    return image ?? new byte[0];
                 }
                 else
                 {
-                    if (IsImageInBase(name, out IImage dbImage))
+                    if (IsImageInBase(imageName, out IImage dbImage))
                     {
-                        if (dbImage.UpdateDate > DateTime.Now.Add(-TimeSpan.FromMinutes(30)))
+                        if (dbImage.UpdateDate.Add(_config.ElapsedDbTime) > DateTime.Now)
                         {
-                            ImageCache.AddImage(imageName, dbImage.Data);
+                            ImageCache.AddImage(imageName, dbImage.Data, DateTime.Now.Add(_config.ElapsedCacheTime));
                             return dbImage.Data;
                         }
                         else
                         {
-                            var image = await GetImageFromSite(name, id);
-                            if (image.Length > 0)
-                            {
-                                ImageCache.AddImage(imageName, image);
-                                _imageRepository.UpdateImage(new Image()
-                                {
-                                    Data = image,
-                                    Name = imageName,
-                                    UpdateDate = DateTime.Now
-                                });
-                                return image;
-                            }
-                            else
-                            {
-                               return  dbImage.Data;
-                            }
+                            return await UpdateImage(_imageRepository.UpdateImage, name, id.Value, dbImage.Data);
                         }
                     }
                     else
                     {
-                        var image = await GetImageFromSite(name, id);
-                        if (image.Length > 0)
-                        {
-                            ImageCache.AddImage(imageName, image);
-                            _imageRepository.CreateImage(new Image()
-                            {
-                                Data = image,
-                                Name = imageName,
-                                UpdateDate = DateTime.Now
-                            });
-                            return image;
-                        }
+                        return await UpdateImage(_imageRepository.CreateImage, name, id.Value, new byte[0]);
                     }
                 }
 
@@ -74,11 +52,37 @@ namespace Core.Service
             return new byte[0];
         }
 
+        private async Task<byte[]> UpdateImage(Func<IImage, bool> func, string name, int id, byte[] defaultData)
+        {
+            var image = await GetImageFromSite(name, id);
+            if (image.Length == 0) { return defaultData; }
+
+            var imageName = GetImageName(id, name);
+            var iImage = new Image()
+            {
+                Data = image,
+                Name = imageName,
+                UpdateDate = DateTime.Now
+            };
+
+            ImageCache.AddImage(imageName, image, DateTime.Now.Add(_config.ElapsedCacheTime));
+            func?.Invoke(iImage);
+            return image;
+
+        }
+
+        private string GetImageName(int id, string name)
+        {
+            return id + "_image_" + name;
+        }
+
         private bool IsImageInBase(string imageName, out IImage image)
         {
             image = _imageRepository.GetImageByName(imageName)!;
             return image != null;
         }
+
+
 
         private async Task<byte[]> GetImageFromSite(string? name, int? id)
         {
