@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/DataTables/datatables.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/carTable.css" asp-append-version="true" />
+
 </head>
 <body>
     <header>
@@ -39,6 +42,7 @@
             </div>
         </nav>
     </header>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -50,11 +54,47 @@
             &copy; 2023 - WebApplication1 - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
     </footer>
+    <!-- Modal -->
+    <div class="modal fade" id="messages-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width:fit-content;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-title w-100 text-center" id="exampleModalLabel"></div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <partial name="_ValidationScriptsPartial" />
+
 
     @await RenderSectionAsync("Scripts", required: false)
+    <script type="text/javascript">
+
+        function ShowMessages(data) {
+            var myModal = new bootstrap.Modal(document.getElementById('messages-modal'), {
+                keyboard: true
+            });
+            $('#messages-modal .modal-title').html(data)
+
+            myModal.show();
+            let timer = setTimeout(() => {
+                myModal.hide();
+                //$('#messages-modal .modal-title').html('');
+            }, 33000);
+
+            var myModalEl = document.getElementById('messages-modal')
+            myModalEl.addEventListener('hidden.bs.modal', function (event) {
+                clearTimeout(timer);
+            })
+        }
+
+    </script>
 </body>
 </html>

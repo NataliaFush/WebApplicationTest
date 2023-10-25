@@ -1,0 +1,72 @@
+﻿@model WebApplication1.PagesModel.UserEditViewModel
+
+<div class="text-center">
+    @if (Model.Result != null)
+    {
+        <text>
+            <div id="result-message" class="d-none">
+                <div class="@Model.Result.ResultType.ToString().ToLower()">
+                    @Model.Result.Message
+                </div>
+            </div>
+        </text>
+    }
+    <form method="post" asp-page="UserUpdate">
+        @* <div asp-validation-summary="All"></div> *@
+        <div class="d-flex flex-column gap-4">
+            <div class="d-flex justify-content-center gap-3" id="user-data">
+                <div class="d-flex flex-column align-items-end gap-2">
+                    <div>
+                        <label asp-for="Name"></label>
+                        <input asp-for="Name">
+                        <span asp-validation-for="Name"></span>
+                    </div>
+                    <div>
+                        <label asp-for="Age"></label>
+                        <input type="number" asp-for="Age">
+                        <span asp-validation-for="Age"></span>
+                    </div>
+                    <div>
+                        <label asp-for="Email"></label>
+                        <input asp-for="Email" id="author-email-id" oninput="ChangeEmail(event)" />
+                        <span class="loader d-none" id="email-loader"></span>
+                        <span class="d-none field-validation-error" id="email-loader-error">This email is used</span>
+                        <span asp-validation-for="Email"></span>
+                    </div>
+                    <div>
+
+                        <label asp-for="Password"></label>
+                        <input type="password" asp-for="Password">
+                        <span asp-validation-for="Password"></span>
+                    </div>
+
+                    <input asp-for="Address.Id" />
+                    <input asp-for="Id" />
+                </div>
+                <div class="d-flex flex-column align-items-end gap-2">
+                    <div>
+                        <label asp-for="Address.City"></label>
+                        <input asp-for="Address.City">
+                        <span asp-validation-for="Address.City"></span>
+                    </div>
+                    <div>
+                        <label asp-for="Address.Street"></label>
+                        <input asp-for="Address.Street">
+                        <span asp-validation-for="Address.Street"></span>
+                    </div>
+                    <div>
+                        <label asp-for="Address.PostalCode"></label>
+                        <input asp-for="Address.PostalCode">
+                        <span asp-validation-for="Address.PostalCode"></span>
+                    </div>
+                    <div>
+                        <input asp-for="Address.Id" />
+                    </div>
+                </div>
+            </div>
+            <div>
+                <input type="submit" value="Edit">
+            </div>
+        </div>
+    </form>
+</div>

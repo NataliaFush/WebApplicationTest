@@ -17,3 +17,20 @@ body {
   margin-bottom: 60px;
 }
 
+.user-name-modal {
+    text-decoration: underline;
+    cursor: pointer;
+    color: blueviolet;
+}
+
+    .user-name-modal:hover {
+        color: black;
+    }
+
+.success {
+    color: seagreen;
+}
+
+.fail {
+    color: red;
+}

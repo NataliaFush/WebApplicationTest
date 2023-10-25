@@ -1,0 +1,61 @@
+﻿@page
+@using WebApplication1.Helpers
+@model WebApplication1.Pages.UserUpdateModel
+
+@await Html.PartialAsync("_User", Model.User);
+
+@section Scripts{
+    <script type="text/javascript">
+
+        function ChangeEmail(e) {
+            e.preventDefault();
+
+            if (e.target.value.length > 4 && e.target.checkValidity()) {
+                console.log(e.target.value)
+
+                let token = document.querySelector('input[name="RequestVerificationToken"]').getAttribute("value");
+                let loader = document.getElementById('email-loader');
+                let messeges = document.getElementById('email-loader-error');
+
+                loader.classList.remove('d-none');
+                messeges.classList.add('d-none');
+
+                let data = toFormData({
+                    'email': e.target.value,
+                    'RequestVerificationToken': token
+                });
+
+                fetch("?handler=CheckEmail", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                    },
+                    body: data
+                }).then((response) => {
+
+                    loader.classList.add('d-none');
+                    return response.json();
+
+                }).then((data) => {
+
+                    if (data) {
+                        messeges.classList.remove('d-none');
+                    }
+                    console.log(data);
+                });
+            }
+        }
+
+        function toFormData(details) {
+            var formBody = [];
+            for (var property in details) {
+                var encodedKey = encodeURIComponent(property);
+                var encodedValue = encodeURIComponent(details[property]);
+                formBody.push(encodedKey + "=" + encodedValue);
+            }
+            formBody = formBody.join("&");
+            return formBody;
+        }
+
+    </script>
+}

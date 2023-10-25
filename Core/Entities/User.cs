@@ -16,5 +16,6 @@ namespace Core.Entities
         public DateTime? CreateData { get; set; }
         public string? Password { get; set; }
         public IAddress? Address { get; set; }
+        public int? AddressId { get; set; }
     }
 }

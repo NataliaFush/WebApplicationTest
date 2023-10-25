@@ -2,10 +2,9 @@
 @model WebApplication1.Pages.UsersModel
 @{
 }
-<link rel="stylesheet" href="~/css/carTable.css" asp-append-version="true" />
 
-<table class="table-car">
-    <thead style="background-color:pink;">
+<table class="table-car" id="myTable">
+    <thead style="background-color: sandybrown;">
         <tr class="text-center">
             <th>Id</th>
             <th>Name</th>
@@ -21,8 +20,8 @@
         {
             <tr>
                 <th>@user.Id</th>
-                <th>@user.Name</th>
-                <th>@user.Email</th>
+                <th><p onclick="getUser(this)" data-user-id="@user.Id" class="user-name-modal" data-bs-toggle="modal" data-bs-target="#myModal">@user.Name</p></th>
+                <th><a asp-page="UserUpdate" asp-route-id="@user.Id">@user.Email</a></th>
                 <th>@user.Age</th>
                 <th>@user.CreateData</th>
                 <th>@user.Password</th>
@@ -33,4 +32,67 @@
     </tbody>
 </table>
 
+<div class="modal fade" tabindex="-1" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel">
+                    Edit your user
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Modal body text goes here.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+
+    <script src="~/lib/DataTables/datatables.min.js"></script>
+    <script type="text/javascript">
+        let table = new DataTable('#myTable')
+
+        function getUser(element) {
+            let userId = $(element).data('user-id');
+
+            $.ajax({
+                url: '/UserUpdate?id=' + userId,
+            }).done(function (data) {
+                $('#myModal .modal-body').html(data);
+                sendUserPost();
+            });
+        };
+
+        function sendUserPost() {
+            $("#myModal form").submit(function (e) {
+
+                e.preventDefault();
+                var actionurl = e.currentTarget.action;
+                let data = $("#myModal form").serialize();
+
+                $.ajax({
+                    url: actionurl,
+                    type: 'post',
+                    data: data,
+                    success: function (data) {
+                        $('#myModal .modal-body').html(data);
+                        let message = $(data).find('#result-message').html();
+                        if (message) {
+                            ShowMessages(message);
+                        }
+                        else {
+                            ShowMessages('Not updated');
+                        }
+                        sendUserPost();
+                    }
+                });
+            });
+        };
+
+    </script>
+
+}
 

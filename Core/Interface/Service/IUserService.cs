@@ -12,5 +12,6 @@ namespace Core.Interface.Service
         bool CreateUser(IUser user);
         bool IsUsedEmail(string? Email);
         public IEnumerable<IUser> GetAllUser();
+        bool UpdateUser(IUser user);
     }
 }

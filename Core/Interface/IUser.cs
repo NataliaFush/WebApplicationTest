@@ -16,5 +16,6 @@ namespace Core.Interface
         DateTime? CreateData { get; set; }
         string? Password { get; set; }
         IAddress? Address { get; set; }
+        int? AddressId { get; set; }
     }
 }

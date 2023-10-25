@@ -5,9 +5,6 @@
 td, th {
     border: 1px dotted black; 
 }
-table tr:nth-child(2n) {
-    background-color: bisque; 
-}
 .validation-summary-errors{
     color : red;
 }
@@ -70,3 +67,8 @@ img.resize {
     .card button:hover {
         opacity: 0.7;
     }
+
+table tr:nth-child(2n),
+.even {
+    background-color: bisque !important;
+}

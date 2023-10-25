@@ -14,5 +14,6 @@ namespace MyDataBase
         public bool CreateUser(IUser user);
         public IUser GetUserByEmail(string email);
         public IEnumerable<IUser> GetAllUser();
+        bool UpdateUser(IUser user);
     }
 }

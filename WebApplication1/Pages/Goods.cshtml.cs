@@ -1,4 +1,5 @@
 using Core.Entities;
+using Core.Enums;
 using Core.Healper;
 using Core.Interface;
 using Core.Interface.Service;
@@ -6,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
+using WebApplication1.PagesModel;
 
 namespace WebApplication1.Pages
 {
@@ -13,45 +15,16 @@ namespace WebApplication1.Pages
     {
                
         public IEnumerable<UserModel> Users { get; set; }
-        public class Car
-        {
-            public string Name { get; set; }
-            public int Price { get; set; }
-            public Category Category { get; set; }
-        }
-        
         protected readonly IUserService _userService;
-
         public GoodsModel(IUserService userService)
         {
             _userService = userService;
         }
-
-        public enum Category
-        {
-            None,
-            Legkova,
-            Vantajna,
-            Bike
-        }
-
+              
         [BindProperty]
         public UserModel Input { get; set; }
-        public Result Response { get; set; }
-        public class Result
-        {
-            public ResultType ResultType { get; set; }
-            public string? Message { get; set; }
-
-
-        }
-        public enum ResultType
-        {
-            Success,
-            Error
-        }
-
-
+        public ResultModel Response { get; set; }
+       
         public class UserModel
         {
             [HiddenInput]
@@ -129,16 +102,16 @@ namespace WebApplication1.Pages
 
                 if (_userService.CreateUser(user))
                 {
-                    Response = new Result() { ResultType = ResultType.Success, Message = $"User {Input.Name} was created" };
+                    Response = new ResultModel() { ResultType = ResultType.Success, Message = $"User {Input.Name} was created" };
                 }
                 else
                 {
-                    Response = new Result() { ResultType = ResultType.Error, Message = $"User {Input.Name} was not created" };
+                    Response = new ResultModel() { ResultType = ResultType.Error, Message = $"User {Input.Name} was not created" };
                 }
             }
             else
             {
-                Response = new Result() { ResultType = ResultType.Error, Message = $"User {Input.Name} was not created" };
+                Response = new ResultModel() { ResultType = ResultType.Error, Message = $"User {Input.Name} was not created" };
             }
 
            

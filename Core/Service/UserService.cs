@@ -36,6 +36,10 @@ namespace Core.Service
             user.CreateData = DateTime.Now;
             return _userRepositorii.CreateUser(user);
         }
+        public bool UpdateUser(IUser user)
+        {
+            return _userRepositorii.UpdateUser(user);
+        }
 
         public IEnumerable<IUser> GetAllUser()
         {
